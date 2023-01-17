@@ -25,7 +25,7 @@ $pdf->Cell(30, 6, "Kode Pembelian", 1, 0, "C");
 $pdf->Cell(55, 6, "Barang", 1, 0, "C");
 $pdf->Cell(10, 6, "Jumlah", 1, 0, "C");
 $pdf->Cell(15, 6, "Satuan", 1, 0, "C");
-$pdf->Cell(45, 6, "Supplier", 1, 0, "C");
+$pdf->Cell(30, 6, "Supplier", 1, 0, "C");
 $pdf->Cell(25, 6, "Harga", 1, 0, "C");
 $pdf->Cell(35, 6, "Tanggal", 1, 0, "C");
 $pdf->Cell(30, 6, "Sub-total", 1, 1, "C");
@@ -58,7 +58,7 @@ while ($data = mysqli_fetch_array($ambil)) {
     $pdf->Cell(55, 6, $data["kode_barang"] . "-" . $data["nama_barang"], 1, 0);
     $pdf->Cell(10, 6, $data["jumlah"], 1, 0);
     $pdf->Cell(15, 6, $data["nama_satuan"], 1, 0);
-    $pdf->Cell(45, 6, $data["nama_supplier"] . "-" . $data["kab_kota"], 1, 0);
+    $pdf->Cell(30, 6, $data["nama_supplier"], 1, 0);
     $pdf->Cell(25, 6, "Rp." . number_format($data["harga"]), 1, 0);
     $pdf->Cell(35, 6, $data["tanggal"], 1, 0);
     $pdf->Cell(30, 6, "Rp." . number_format($subtotal), 1, 1);
