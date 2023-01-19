@@ -145,7 +145,7 @@ if (!isset($_SESSION["login"])) {
                                     ?>
 
                                         <tr>
-                                            <td><?= $i++; ?></td>
+                                            <td><?= $i++; ?>.</td>
                                             <td><?= $data["nama_satuan"]; ?></td>
                                             <td><?= $data["ket_satuan"]; ?></td>
                                             <td>

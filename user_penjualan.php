@@ -179,7 +179,7 @@ if (!isset($_SESSION["login"])) {
                                     ?>
 
                                         <tr>
-                                            <td><?= $no++; ?></td>
+                                            <td><?= $no++; ?>.</td>
                                             <td><?= $data["kode_penjualan"]; ?></td>
                                             <td><?= $data["kode_barang"]; ?> - <?= $data["nama_barang"]; ?></td>
                                             <td><?= $data["jumlah"]; ?></td>

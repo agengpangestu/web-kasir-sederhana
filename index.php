@@ -173,7 +173,7 @@ if (!isset($_SESSION["login"])) {
 
                                     ?>
                                         <tr>
-                                            <td><?= $no++; ?></td>
+                                            <td><?= $no++; ?>.</td>
                                             <td><?= $data["kode_barang"]; ?></td>
                                             <td><?= $data["nama_kategori"]; ?></td>
                                             <td><?= $data["nama_merek"]; ?></td>

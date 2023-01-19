@@ -146,7 +146,7 @@ if (!isset($_SESSION["login"])) {
                                         $id = $data["id_kategori"];
                                     ?>
                                         <tr>
-                                            <td><?= $no++; ?></td>
+                                            <td><?= $no++; ?>.</td>
                                             <td><?= $data["nama_kategori"]; ?></td>
                                             <td><?= $data["ket_kategori"]; ?></td>
                                             <td>

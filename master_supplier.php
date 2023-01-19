@@ -155,7 +155,7 @@ if (!isset($_SESSION["login"])) {
                                         $kab = $data["kab_kota"];
                                     ?>
                                         <tr>
-                                            <td><?= $i++; ?></td>
+                                            <td><?= $i++; ?>.</td>
                                             <td><?= $kode_sp; ?></td>
                                             <td><?= $nama_sp; ?></td>
                                             <td><?= $kab; ?></td>

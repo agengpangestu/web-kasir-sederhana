@@ -150,7 +150,7 @@ if (!isset($_SESSION["login"])) {
                                         $nama_merek = $data["nama_merek"];
                                     ?>
                                         <tr>
-                                            <td><?= $no++; ?></td>
+                                            <td><?= $no++; ?>.</td>
                                             <td><?= $data["nama_merek"]; ?></td>
                                             <td><?= $data["ket_merek"]; ?></td>
                                             <td>

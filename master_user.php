@@ -152,7 +152,7 @@ if (!isset($_SESSION["login"])) {
                                         $id = $data["id_user"];
                                     ?>
                                         <tr>
-                                            <td><?= $no++; ?></td>
+                                            <td><?= $no++; ?>.</td>
                                             <td><?= $data["username"]; ?></td>
                                             <td><?= $data["pw"]; ?></td>
                                             <td><?= $data["full_name"]; ?></td>
