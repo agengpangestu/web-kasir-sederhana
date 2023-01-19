@@ -126,7 +126,7 @@ if (!isset($_SESSION["login"])) {
                         <i class="fas fa-cash-register"></i> Tambah Penjualan
                     </button>
                     <!-- Button laporan -->
-                    <a href="cetak_penjualan.php">
+                    <a href="cetak_penjualan.php" onclick="return confirm('Ingin mencetak laporan?');">
                         <button type="button" class="btn btn-secondary mb-4">Laporan</button>
                     </a>
 

@@ -14,7 +14,7 @@ $pdf = new FPDF("L", "mm", "Letter");
 $pdf->AddPage();
 
 $pdf->SetFont("Times", "B", 16);
-$pdf->Cell(0, 7, "LAPORAN PEMBELIAN KASIR", 0, 1, "C");
+$pdf->Cell(0, 7, "LAPORAN PENJUALAN KASIR", 0, 1, "C");
 
 $pdf->Cell(10, 7, "", 0, 1);
 

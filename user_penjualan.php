@@ -121,7 +121,7 @@ if (!isset($_SESSION["login"])) {
                     </button>
                     <!-- Button laporan -->
                     <a href="user_cetak_penjualan.php">
-                        <button type="button" class="btn btn-secondary mb-4">Laporan</button>
+                        <button type="button" class="btn btn-secondary mb-4" onclick="return confirm('Ingin mencetak laporan?');">Laporan</button>
                     </a>
 
                     <!-- tabel -->
