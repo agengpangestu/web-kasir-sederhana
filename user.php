@@ -128,7 +128,7 @@ if (!isset($_SESSION["login"])) {
                             <i class="fas fa-table me-1"></i>
                             Daftar Barang
                         </div>
-                        <div class="card-body">
+                        <!-- <div class="card-body">
                             <table id="datatablesSimple">
                                 <thead>
                                     <tr>
@@ -165,6 +165,70 @@ if (!isset($_SESSION["login"])) {
                                     $barang = mysqli_query($conn, $ambil);
                                     while ($data = mysqli_fetch_array($barang)) :
                                         $id = $data["id_barang"];
+                                    ?>
+                                        <tr>
+                                            <td><?= $no++; ?>.</td>
+                                            <td><?= $data["kode_barang"]; ?></td>
+                                            <td><?= $data["nama_kategori"]; ?></td>
+                                            <td><?= $data["nama_merek"]; ?></td>
+                                            <td><?= $data["nama_barang"]; ?></td>
+                                            <td><?= $data["stok"]; ?></td>
+                                            <td>Rp.<?= number_format($data["harga"]); ?>,-</td>
+                                            <td>Rp.<?= number_format($data["harga_jual"]); ?>,-</td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?= $id; ?>">
+                                                    Hapus
+                                                </button>
+                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ubah<?= $id; ?>">
+                                                    Ubah
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                    <?php endwhile; ?>
+                                </tbody>
+                            </table>
+                        </div> -->
+
+                        <!-- New Tables -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Kode Barang</th>
+                                        <th>Kategori</th>
+                                        <th>Merek</th>
+                                        <th>Nama Barang</th>
+                                        <th>Stok</th>
+                                        <th>Harga Beli</th>
+                                        <th>Harga Jual</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    $ambil = "SELECT master_barang.id_barang,
+                                             master_barang.kode_barang,
+
+                                             master_kategori.id_kategori,
+                                             master_kategori.nama_kategori,
+                                             
+                                             master_merek.id_merek,
+                                             master_merek.nama_merek,
+
+                                             master_barang.nama_barang,
+                                             master_barang.harga,
+                                             master_barang.harga_jual,
+                                             master_barang.stok
+                                             FROM master_barang INNER JOIN master_kategori ON master_barang.kategori = master_kategori.id_kategori
+                                             JOIN master_merek ON master_barang.merek = master_merek.id_merek";
+
+                                    $barang = mysqli_query($conn, $ambil);
+                                    while ($data = mysqli_fetch_array($barang)) :
+                                        $id_brg = $data["id_barang"];
+
                                     ?>
                                         <tr>
                                             <td><?= $no++; ?>.</td>
@@ -310,8 +374,10 @@ if (!isset($_SESSION["login"])) {
                                         </div>
                                     <?php endwhile; ?>
                                 </tbody>
+
                             </table>
                         </div>
+
                     </div>
                 </div>
             </main>

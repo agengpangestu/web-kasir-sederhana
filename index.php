@@ -109,7 +109,7 @@ if (!isset($_SESSION["login"])) {
                     <h1 class="mt-4">Barang</h1>
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
-                            <div class="card bg-primary text-white mb-4">
+                            <div class="card bg-info text-white mb-4">
                                 <!-- menghitung jumlah barang -->
                                 <?php
                                 $jumlah_brg = mysqli_query($conn, "SELECT * FROM master_barang");
@@ -121,11 +121,9 @@ if (!isset($_SESSION["login"])) {
                     </div>
 
                     <!-- Button to Open the Modal -->
-                    <button type="button" class="btn btn-info mb-4" data-bs-toggle="modal" data-bs-target="#barangModal">
+                    <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#barangModal">
                         Tambah Barang
                     </button>
-
-
 
                     <!-- tabel -->
                     <div class="card mb-4">
@@ -133,8 +131,72 @@ if (!isset($_SESSION["login"])) {
                             <i class="fas fa-table me-1"></i>
                             Daftar Barang
                         </div>
+                        <!-- <div class="card-body">
+                            <table id="datatablesSimple" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Kode Barang</th>
+                                        <th>Kategori</th>
+                                        <th>Merek</th>
+                                        <th>Nama Barang</th>
+                                        <th>Stok</th>
+                                        <th>Harga Beli</th>
+                                        <th>Harga Jual</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    $ambil = "SELECT master_barang.id_barang,
+                                             master_barang.kode_barang,
+
+                                             master_kategori.id_kategori,
+                                             master_kategori.nama_kategori,
+                                             
+                                             master_merek.id_merek,
+                                             master_merek.nama_merek,
+
+                                             master_barang.nama_barang,
+                                             master_barang.harga,
+                                             master_barang.harga_jual,
+                                             master_barang.stok
+                                             FROM master_barang INNER JOIN master_kategori ON master_barang.kategori = master_kategori.id_kategori
+                                             JOIN master_merek ON master_barang.merek = master_merek.id_merek";
+
+                                    $barang = mysqli_query($conn, $ambil);
+                                    while ($data = mysqli_fetch_array($barang)) :
+                                        $id_brg = $data["id_barang"];
+
+                                    ?>
+                                        <tr>
+                                            <td><?= $no++; ?>.</td>
+                                            <td><?= $data["kode_barang"]; ?></td>
+                                            <td><?= $data["nama_kategori"]; ?></td>
+                                            <td><?= $data["nama_merek"]; ?></td>
+                                            <td><?= $data["nama_barang"]; ?></td>
+                                            <td><?= $data["stok"]; ?></td>
+                                            <td>Rp.<?= number_format($data["harga"]); ?>,-</td>
+                                            <td>Rp.<?= number_format($data["harga_jual"]); ?>,-</td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?= $id_brg; ?>">
+                                                    Hapus
+                                                </button>
+                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ubah<?= $id_brg; ?>">
+                                                    Ubah
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                    <?php endwhile; ?>
+                                </tbody>
+                            </table>
+                        </div> -->
+
+                        <!-- New Tables -->
                         <div class="card-body">
-                            <table id="datatablesSimple">
+                            <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
@@ -318,6 +380,7 @@ if (!isset($_SESSION["login"])) {
                                         </div>
                                     <?php endwhile; ?>
                                 </tbody>
+
                             </table>
                         </div>
                     </div>
@@ -408,5 +471,7 @@ if (!isset($_SESSION["login"])) {
         </div>
     </div>
 </div>
+
+
 
 </html>

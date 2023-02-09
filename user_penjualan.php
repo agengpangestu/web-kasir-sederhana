@@ -130,7 +130,7 @@ if (!isset($_SESSION["login"])) {
                             <i class="fas fa-table me-1"></i>
                             Penjualan
                         </div>
-                        <div class="card-body">
+                        <!-- <div class="card-body">
                             <table id="datatablesSimple">
                                 <thead>
                                     <tr>
@@ -193,6 +193,80 @@ if (!isset($_SESSION["login"])) {
                                                     Hapus
                                                 </button>
                                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ubah<?= $id_pj ?>">
+                                                    Ubah
+                                                </button>
+                                            </td>
+                                        </tr>
+
+
+                                    <?php endwhile; ?>
+                                </tbody>
+                            </table>
+                        </div> -->
+
+                        <!-- new tables -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Kode Penjualan</th>
+                                        <th>Barang</th>
+                                        <th>Jumlah</th>
+                                        <th>Satuan</th>
+                                        <th>Harga</th>
+                                        <th>User</th>
+                                        <th>Tanggal</th>
+                                        <th>Sub-total</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    $kueri = "SELECT master_penjualan.id_penjualan,
+                                                        master_penjualan.kode_penjualan,
+                                                        
+                                                        master_barang.id_barang,
+                                                        master_barang.kode_barang,
+                                                        master_barang.nama_barang,
+                                                        master_barang.stok,
+                                                        
+                                                        master_penjualan.jumlah,
+                                                        
+                                                        master_satuan.id_satuan,
+                                                        master_satuan.nama_satuan,
+                                                        
+                                                        master_penjualan.harga,
+                                                        
+                                                        master_user.id_user,
+                                                        master_user.full_name,
+                                                        
+                                                        master_penjualan.tanggal
+                                                    FROM master_penjualan INNER JOIN master_barang ON master_penjualan.barang = master_barang.id_barang
+                                                                                JOIN master_satuan ON master_penjualan.satuan = master_satuan.id_satuan
+                                                                                JOIN master_user ON master_penjualan.user = master_user.id_user";
+
+                                    $ambil = mysqli_query($conn, $kueri) or die(mysqli_error($conn));
+                                    while ($data = mysqli_fetch_array($ambil)) :
+                                        $id_pj = $data["id_penjualan"];
+                                        $subtotal = $data["jumlah"] * $data["harga"];
+                                    ?>
+                                        <tr>
+                                            <td><?= $no++; ?>.</td>
+                                            <td><?= $data["kode_penjualan"]; ?></td>
+                                            <td><?= $data["kode_barang"]; ?> - <?= $data["nama_barang"]; ?></td>
+                                            <td><?= $data["jumlah"]; ?></td>
+                                            <td><?= $data["nama_satuan"]; ?></td>
+                                            <td>Rp.<?= number_format($data["harga"]); ?>,-</td>
+                                            <td><?= $data["full_name"]; ?></td>
+                                            <td><?= $data["tanggal"]; ?></td>
+                                            <td>Rp.<?= number_format($subtotal); ?>,-</td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete<?= $id_pj; ?>">
+                                                    Hapus
+                                                </button>
+                                                <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#ubah<?= $id_pj; ?>">
                                                     Ubah
                                                 </button>
                                             </td>
@@ -310,7 +384,7 @@ if (!isset($_SESSION["login"])) {
                                                                     $select = ($data["id_user"] == $user["id_user"]) ? "selected" : "";
                                                                 ?>
                                                                     <option value="<?= $user["id_user"]; ?>" <?= $select; ?>>
-                                                                        <?= $user["full_name"]; ?>
+                                                                        <?= $user["username"]; ?> - <?= $user["level"]; ?>
                                                                     </option>
                                                                 <?php endwhile; ?>
                                                             </select>
@@ -331,22 +405,16 @@ if (!isset($_SESSION["login"])) {
                                                 </div>
                                             </div>
                                         </div>
-
                                     <?php endwhile; ?>
                                 </tbody>
+
                             </table>
                         </div>
+
                     </div>
                 </div>
             </main>
-            <!-- footer index -->
-            <!-- <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2022</div>
-                    </div>
-                </div>
-            </footer> -->
+
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
@@ -426,7 +494,7 @@ if (!isset($_SESSION["login"])) {
                         while ($ktg = mysqli_fetch_array($ambil)) : ?>
 
                             <option value="<?= $ktg["id_user"]; ?>">
-                                <?= $ktg["username"]; ?> - <?= $ktg["full_name"]; ?>
+                                <?= $ktg["username"]; ?> - <?= $ktg["level"]; ?>
                             </option>
 
                         <?php endwhile; ?>

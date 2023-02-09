@@ -108,7 +108,7 @@ if (!isset($_SESSION["login"])) {
                     <h1 class="mt-4">Supplier</h1>
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
-                            <div class="card bg-primary text-white mb-4">
+                            <div class="card bg-info text-white mb-4">
                                 <!-- menghitung jumlah supplier -->
                                 <?php
                                 $jumlah_sp = mysqli_query($conn, "SELECT * FROM master_supplier");
@@ -120,7 +120,7 @@ if (!isset($_SESSION["login"])) {
                     </div>
 
                     <!-- Button to Open the Modal tambah barang -->
-                    <button type="button" class="btn btn-info mb-4" data-bs-toggle="modal" data-bs-target="#supplierModal">
+                    <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#supplierModal">
                         Tambah Supplier
                     </button>
 
@@ -131,7 +131,7 @@ if (!isset($_SESSION["login"])) {
                             <i class="fas fa-table me-1"></i>
                             Daftar Supplier
                         </div>
-                        <div class="card-body">
+                        <!-- <div class="card-body">
                             <table id="datatablesSimple">
                                 <thead>
                                     <tr>
@@ -156,6 +156,50 @@ if (!isset($_SESSION["login"])) {
                                     ?>
                                         <tr>
                                             <td><?= $i++; ?>.</td>
+                                            <td><?= $kode_sp; ?></td>
+                                            <td><?= $nama_sp; ?></td>
+                                            <td><?= $kab; ?></td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?= $id; ?>">
+                                                    Hapus
+                                                </button>
+                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ubah<?= $id; ?>">
+                                                    Ubah
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                    <?php endwhile; ?>
+                                </tbody>
+                            </table>
+                        </div> -->
+
+                        <!-- New Tables -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Kode Supplier</th>
+                                        <th>Nama Supplier</th>
+                                        <th>Kabupaten/Kota</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $ambil = mysqli_query($conn, "SELECT * FROM master_supplier");
+                                    $no = 1;
+
+
+                                    while ($data = mysqli_fetch_array($ambil)) :
+                                        $id = $data["id_supplier"];
+                                        $kode_sp = $data["kode_supplier"];
+                                        $nama_sp = $data["nama_supplier"];
+                                        $kab = $data["kab_kota"];
+                                    ?>
+                                        <tr>
+                                            <td><?= $no++; ?>.</td>
                                             <td><?= $kode_sp; ?></td>
                                             <td><?= $nama_sp; ?></td>
                                             <td><?= $kab; ?></td>
@@ -236,6 +280,7 @@ if (!isset($_SESSION["login"])) {
                                         </div>
                                     <?php endwhile; ?>
                                 </tbody>
+
                             </table>
                         </div>
                     </div>

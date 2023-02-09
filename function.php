@@ -224,27 +224,46 @@ if (isset($_POST["ubahktg"])) {
 	}
 }
 //hapus 
+// 
 if (isset($_POST["hapusktg"])) {
 	$id = $_POST["id"];
 
-	$kueri = "DELETE FROM master_kategori WHERE id_kategori='$id'";
-	$delete1 = mysqli_query($conn, $kueri);
+	try {
+		$kueri = "DELETE FROM master_kategori WHERE id_kategori='$id'";
+		$delete1 = mysqli_query($conn, $kueri);
 
-	if ($delete1 == 0) {
-		echo "
-			<script>
-				alert('Gagal menghapus!');
+		if ($delete1 == 1) {
+		}
+	} catch (Exception $e) {
+		echo "<script>
+		alert('Gagal menghapus!');
+		alert('Karena ada Kategori yang berelasi, kode:  $conn->errno');
+		window.location.href='master_kategori.php'
+		</script>" . $e->getMessage();
+	} finally {
+		echo "<script>
+				alert('Berhasil dihapus');
 				window.location.href='master_kategori.php'
-			</script>
-		";
-	} else {
-		echo "
-			<script>
-				alert('Berhasil menghapus!');
-				window.location.href='master_kategori.php'
-			</script>
-		" . mysqli_error($conn);
+			 </script>";
 	}
+
+
+	// if ($delete1 == 0) {
+	// 	echo "
+	// 		<script>
+	// 			alert('Gagal menghapus!');
+	// 			window.location.href='master_kategori.php'
+	// 		</script>
+	// 	";
+	// } else {
+	// 	echo "
+	// 		<script>
+	// 			alert('Berhasil menghapus!');
+	// 			window.location.href='master_kategori.php'
+	// 		</script>
+	// 	" . mysqli_error($conn);
+	// 	echo "Tidak dapat dihapus" . mysqli_error($conn);
+	// }
 
 
 
@@ -297,24 +316,42 @@ if (isset($_POST["tambahsp"])) {
 if (isset($_POST["hapussp"])) {
 	$id = $_POST["id"];
 
-	$delete = "DELETE FROM master_supplier WHERE id_supplier = '$id' ";
-	$hapus = mysqli_query($conn, $delete);
 
-	if ($hapus == 0) {
-		echo "
-			<script>
-				alert('Gagal dihapus!');
+
+	try {
+		$delete = "DELETE FROM master_supplier WHERE id_supplier = '$id' ";
+		$hapus = mysqli_query($conn, $delete);
+
+		if ($hapus == 1) {
+		}
+	} catch (Exception $e) {
+		echo "<script>
+		alert('Gagal menghapus!');
+		alert('Karena ada Kategori yang berelasi, kode:  $conn->errno');
+		window.location.href='master_supplier.php'
+		</script>" . $e->getMessage();
+	} finally {
+		echo "<script>
+				alert('Berhasil dihapus');
 				window.location.href='master_supplier.php'
-			</script>
-			";
-	} else {
-		echo "
-			<script>
-				alert('Berhasil dihapus!');
-				window.location.href='master_supplier.php'
-			</script>
-			";
+			 </script>";
 	}
+
+	// if ($hapus == 0) {
+	// 	echo "
+	// 		<script>
+	// 			alert('Gagal dihapus!');
+	// 			window.location.href='master_supplier.php'
+	// 		</script>
+	// 		";
+	// } else {
+	// 	echo "
+	// 		<script>
+	// 			alert('Berhasil dihapus!');
+	// 			window.location.href='master_supplier.php'
+	// 		</script>
+	// 		";
+	// }
 }
 // ubah
 if (isset($_POST["ubahsp"])) {
@@ -389,24 +426,43 @@ if (isset($_POST["tambahuser"])) {
 //hapus
 if (isset($_POST["hapususer"])) {
 	$id = $_POST["id"];
-	$kueri = "DELETE FROM master_user WHERE id_user='$id'";
-	$hapus = mysqli_query($conn, $kueri);
 
-	if ($hapus == 0) {
-		echo "
-		<script>
-			alert('Gagal dihapus!');
-			window.location.href='master_user.php'
-		</script>
-		";
-	} else {
-		echo "
-			<script>
-				alert('Berhasil dihapus!');
+	try {
+		$kueri = "DELETE FROM master_user WHERE id_user='$id'";
+		$hapus = mysqli_query($conn, $kueri);
+
+		if ($hapus == 1) {
+		}
+	} catch (Exception $e) {
+		echo "<script>
+		alert('Gagal menghapus!');
+		alert('Karena ada Kategori yang berelasi, kode:  $conn->errno');
+		window.location.href='master_user.php'
+		</script>" . $e->getMessage();
+	} finally {
+		echo "<script>
+				alert('Berhasil dihapus');
 				window.location.href='master_user.php'
-			</script>
-			";
+			 </script>";
 	}
+
+
+
+	// if ($hapus == 0) {
+	// 	echo "
+	// 	<script>
+	// 		alert('Gagal dihapus!');
+	// 		window.location.href='master_user.php'
+	// 	</script>
+	// 	";
+	// } else {
+	// 	echo "
+	// 		<script>
+	// 			alert('Berhasil dihapus!');
+	// 			window.location.href='master_user.php'
+	// 		</script>
+	// 		";
+	// }
 }
 //ubah
 if (isset($_POST["ubahuser"])) {
@@ -493,24 +549,45 @@ if (isset($_POST["tambahmrk"])) {
 //hapus
 if (isset($_POST["hapusmrk"])) {
 	$id = $_POST["id"];
-	$nama = $_POST["nama_merek"];
-	$kueri = "DELETE FROM master_merek WHERE id_merek='$id' ";
-	$hapus = mysqli_query($conn, $kueri);
-	if ($hapus == 0) {
-		echo "
-		<script>
-			alert('Gagal menghapus!');
-			window.location.href='master_merek.php'
-		</script>
-		";
-	} else {
-		echo "
-			<script>
-				alert('Berhasil dihapus!');
+
+
+	try {
+		$kueri = "DELETE FROM master_merek WHERE id_merek='$id' ";
+		$hapus = mysqli_query($conn, $kueri);
+
+		if ($hapus == 1) {
+		}
+	} catch (Exception $e) {
+		echo "<script>
+		alert('Gagal menghapus!');
+		alert('Karena ada Kategori yang berelasi, kode:  $conn->errno');
+		window.location.href='master_merek.php'
+		</script>" . $e->getMessage();
+	} finally {
+		echo "<script>
+				alert('Berhasil dihapus');
 				window.location.href='master_merek.php'
-			</script>
-			";
+			 </script>";
 	}
+
+	// $nama = $_POST["nama_merek"];
+	// $kueri = "DELETE FROM master_merek WHERE id_merek='$id' ";
+	// $hapus = mysqli_query($conn, $kueri);
+	// if ($hapus == 0) {
+	// 	echo "
+	// 	<script>
+	// 		alert('Gagal menghapus!');
+	// 		window.location.href='master_merek.php'
+	// 	</script>
+	// 	";
+	// } else {
+	// 	echo "
+	// 		<script>
+	// 			alert('Berhasil dihapus!');
+	// 			window.location.href='master_merek.php'
+	// 		</script>
+	// 		";
+	// }
 }
 //ubah
 if (isset($_POST["ubahmrk"])) {
@@ -567,23 +644,42 @@ if (isset($_POST["tambahstn"])) {
 if (isset($_POST["hapusstn"])) {
 	$id = $_POST["id"];
 
-	$kueri = "DELETE FROM master_satuan WHERE id_satuan='$id' ";
-	$hapus = mysqli_query($conn, $kueri);
-	if ($hapus == 0) {
-		echo "
-		<script>
-			alert('Gagal dihapus!');
-			window.location.href='master_satuan.php'
-		</script>
-		";
-	} else {
-		echo "
-		<script>
-			alert('Berhasil dihapus!');
-			window.location.href='master_satuan.php'
-		</script>
-		";
+	try {
+		$kueri = "DELETE FROM master_satuan WHERE id_satuan='$id' ";
+		$hapus = mysqli_query($conn, $kueri);
+
+		if ($hapus == 1) {
+		}
+	} catch (Exception $e) {
+		echo "<script>
+		alert('Gagal menghapus!');
+		alert('Karena ada Kategori yang berelasi, kode:  $conn->errno');
+		window.location.href='master_satuan.php'
+		</script>" . $e->getMessage();
+	} finally {
+		echo "<script>
+				alert('Berhasil dihapus');
+				window.location.href='master_satuan.php'
+			 </script>";
 	}
+
+	// $kueri = "DELETE FROM master_satuan WHERE id_satuan='$id' ";
+	// $hapus = mysqli_query($conn, $kueri);
+	// if ($hapus == 0) {
+	// 	echo "
+	// 	<script>
+	// 		alert('Gagal dihapus!');
+	// 		window.location.href='master_satuan.php'
+	// 	</script>
+	// 	";
+	// } else {
+	// 	echo "
+	// 	<script>
+	// 		alert('Berhasil dihapus!');
+	// 		window.location.href='master_satuan.php'
+	// 	</script>
+	// 	";
+	// }
 }
 // ubah
 if (isset($_POST["ubahstn"])) {
@@ -768,26 +864,24 @@ if (isset($_POST["ubahktguser"])) {
 //hapus belum jadi
 if (isset($_POST["hapusktguser"])) {
 	$id = $_POST["id"];
-	$nama = $_POST['nama_kategori'];
-	$query = "DELETE FROM master_kategori WHERE id_kategori='$id'";
-	$result = mysqli_query($conn, $query);
 
-	if ($result == 0) {
-		echo "
-			<script>
-				alert('Gagal dihapus!');
-				alert('Karena berelasi!');
+	try {
+		$query = "DELETE FROM master_kategori WHERE id_kategori='$id'";
+		$result = mysqli_query($conn, $query);
+
+		if ($result == 1) {
+		}
+	} catch (Exception $e) {
+		echo "<script>
+		alert('Gagal menghapus!');
+		alert('Karena ada Kategori yang berelasi, kode:  $conn->errno');
+		window.location.href='user_kategori.php'
+		</script>" . $e->getMessage();
+	} finally {
+		echo "<script>
+				alert('Berhasil dihapus');
 				window.location.href='user_kategori.php'
-			</script>
-			" or die(mysqli_connect_errno() . mysqli_connect_error());
-		// var_dump($result);
-	} else {
-		echo "
-			<script>
-				alert('Berhasil dihapus!');
-				window.location.href='user_kategori.php'
-			</script>
-			";
+			 </script>";
 	}
 }
 
@@ -821,23 +915,23 @@ if (isset($_POST["tambahspuser"])) {
 if (isset($_POST["hapusspuser"])) {
 	$id = $_POST["id_supplier"];
 
-	$delete = "DELETE FROM master_supplier WHERE id_supplier = '$id' ";
-	$kueri = mysqli_query($conn, $delete);
+	try {
+		$delete = "DELETE FROM master_supplier WHERE id_supplier = '$id' ";
+		$kueri = mysqli_query($conn, $delete);
 
-	if ($kueri == 0) {
-		echo "
-		<script>
-			alert('Gagal dihapus!');
-			window.location.href='user_supplier.php'
-		</script>
-		" or die(mysqli_connect_errno() . mysqli_connect_error());
-	} else {
-		echo "
-			<script>
-				alert('Berhasil dihapus!');
+		if ($kueri == 1) {
+		}
+	} catch (Exception $e) {
+		echo "<script>
+		alert('Gagal menghapus!');
+		alert('Karena ada Kategori yang berelasi, kode:  $conn->errno');
+		window.location.href='user_supplier.php'
+		</script>" . $e->getMessage();
+	} finally {
+		echo "<script>
+				alert('Berhasil dihapus');
 				window.location.href='user_supplier.php'
-			</script>
-			";
+			 </script>";
 	}
 }
 // ubah
@@ -896,23 +990,23 @@ if (isset($_POST["tambahmrkuser"])) {
 if (isset($_POST["hapusmrkuser"])) {
 	$nama = $_POST["nama_merek"];
 
-	$kueri = "DELETE FROM master_merek WHERE nama_merek='$nama' ";
-	$hapus = mysqli_query($conn, $kueri);
+	try {
+		$kueri = "DELETE FROM master_merek WHERE nama_merek='$nama' ";
+		$hapus = mysqli_query($conn, $kueri);
 
-	if ($hapus == 0) {
-		echo "
-			<script>
-				alert('Gagal dihapus!');
+		if ($hapus == 1) {
+		}
+	} catch (Exception $e) {
+		echo "<script>
+		alert('Gagal menghapus!');
+		alert('Karena ada Kategori yang berelasi, kode:  $conn->errno');
+		window.location.href='user_merek.php'
+		</script>" . $e->getMessage();
+	} finally {
+		echo "<script>
+				alert('Berhasil dihapus');
 				window.location.href='user_merek.php'
-			</script>
-			" or die(mysqli_connect_errno() . mysqli_connect_error());
-	} else {
-		echo "
-			<script>
-				alert('Berhasil dihapus!');
-				window.location.href='user_merek.php'
-			</script>
-			";
+			 </script>";
 	}
 }
 //ubah //belum bisa
@@ -972,22 +1066,23 @@ if (isset($_POST["tambahstnuser"])) {
 if (isset($_POST["hapusstnuser"])) {
 	$id = $_POST["id"];
 
-	$delete = "DELETE FROM master_satuan WHERE id_satuan='$id'";
-	$hapus = mysqli_query($conn, $delete);
-	if ($hapus == 0) {
-		echo "
-			<script>
-				alert('Gagal dihapus!');
+	try {
+		$delete = "DELETE FROM master_satuan WHERE id_satuan='$id'";
+		$hapus = mysqli_query($conn, $delete);
+
+		if ($hapus == 1) {
+		}
+	} catch (Exception $e) {
+		echo "<script>
+		alert('Gagal menghapus!');
+		alert('Karena ada Kategori yang berelasi, kode:  $conn->errno');
+		window.location.href='user_satuan.php'
+		</script>" . $e->getMessage();
+	} finally {
+		echo "<script>
+				alert('Berhasil dihapus');
 				window.location.href='user_satuan.php'
-			</script>
-			" or die(mysqli_connect_errno() . mysqli_connect_error());
-	} else {
-		echo "
-			<script>
-				alert('Berhasil dihapus!');
-				window.location.href='user_satuan.php'
-			</script>
-			";
+			 </script>";
 	}
 }
 // ubah

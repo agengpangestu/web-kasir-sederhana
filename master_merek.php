@@ -108,7 +108,7 @@ if (!isset($_SESSION["login"])) {
                     <h1 class="mt-4">Merek</h1>
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
-                            <div class="card bg-primary text-white mb-4">
+                            <div class="card bg-info text-white mb-4">
                                 <!-- menghitung jumlah merek -->
                                 <?php
                                 $jumlah_mrk = mysqli_query($conn, "SELECT * FROM master_merek");
@@ -120,7 +120,7 @@ if (!isset($_SESSION["login"])) {
                     </div>
 
                     <!-- Button to Open the Modal tambah barang -->
-                    <button type="button" class="btn btn-info mb-4" data-bs-toggle="modal" data-bs-target="#merekModal">
+                    <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#merekModal">
                         Tambah Merek
                     </button>
 
@@ -130,7 +130,7 @@ if (!isset($_SESSION["login"])) {
                             <i class="fas fa-table me-1"></i>
                             Daftar Merek
                         </div>
-                        <div class="card-body">
+                        <!-- <div class="card-body">
                             <table id="datatablesSimple">
                                 <thead>
                                     <tr>
@@ -161,6 +161,45 @@ if (!isset($_SESSION["login"])) {
                                                     Ubah
                                                 </button>
 
+                                            </td>
+                                        </tr>
+
+                                    <?php endwhile; ?>
+                                </tbody>
+                            </table>
+                        </div> -->
+
+                        <!-- New Tables -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Nama Merek</th>
+                                        <th>Ket. Merek</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $ambil = mysqli_query($conn, "SELECT * FROM master_merek");
+                                    $no = 1;
+
+
+                                    while ($data = mysqli_fetch_array($ambil)) :
+                                        $nama_merek = $data["nama_merek"];
+                                    ?>
+                                        <tr>
+                                            <td><?= $no++; ?>.</td>
+                                            <td><?= $data["nama_merek"]; ?></td>
+                                            <td><?= $data["ket_merek"]; ?></td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?= $nama_merek; ?>">
+                                                    Hapus
+                                                </button>
+                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ubah<?= $nama_merek; ?>">
+                                                    Ubah
+                                                </button>
                                             </td>
                                         </tr>
                                         <!-- The Modal hapus -->
@@ -223,6 +262,7 @@ if (!isset($_SESSION["login"])) {
                                         </div>
                                     <?php endwhile; ?>
                                 </tbody>
+
                             </table>
                         </div>
                     </div>

@@ -136,7 +136,7 @@ if (!isset($_SESSION["login"])) {
                             <i class="fas fa-table me-1"></i>
                             Pembelian
                         </div>
-                        <div class="card-body">
+                        <!-- <div class="card-body">
                             <table id="datatablesSimple">
                                 <thead>
                                     <tr>
@@ -195,6 +195,75 @@ if (!isset($_SESSION["login"])) {
                                                     Hapus
                                                 </button>
                                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ubah<?= $id; ?>">
+                                                    Ubah
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                    <?php endwhile; ?>
+                                </tbody>
+                            </table>
+                        </div> -->
+
+                        <!-- New Tables -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Kode Pembelian</th>
+                                        <th>Barang</th>
+                                        <th>Jumlah</th>
+                                        <th>Satuan</th>
+                                        <th>Supplier</th>
+                                        <th>Harga</th>
+                                        <th>Tanggal</th>
+                                        <th>Sub-total</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    $kueri = "SELECT master_pembelian.id_pembelian,
+                                                        master_pembelian.kode_pembelian,
+                                                        master_barang.id_barang,
+                                                        master_barang.kode_barang,
+                                                        master_barang.nama_barang,
+                                                        master_barang.stok,
+                                                        master_pembelian.jumlah,
+                                                        master_satuan.id_satuan,
+                                                        master_satuan.nama_satuan,
+                                                        master_supplier.id_supplier,
+                                                        master_supplier.nama_supplier,
+                                                        master_supplier.kab_kota,
+                                                        master_pembelian.harga,
+                                                        master_pembelian.tanggal
+                                                    FROM master_pembelian INNER JOIN master_barang ON master_pembelian.barang = master_barang.id_barang
+                                                                                JOIN master_satuan ON master_pembelian.satuan = master_satuan.id_satuan
+                                                                                JOIN master_supplier ON master_pembelian.supplier = master_supplier.id_supplier";
+
+
+                                    $ambil = mysqli_query($conn, $kueri) or die(mysqli_error($conn));
+                                    while ($data = mysqli_fetch_array($ambil)) :
+                                        $id = $data["id_pembelian"];
+                                        $subtotal = $data["jumlah"] * $data["harga"];
+                                    ?>
+                                        <tr>
+                                            <td><?= $no++; ?>.</td>
+                                            <td><?= $data["kode_pembelian"]; ?></td>
+                                            <td><?= $data["kode_barang"]; ?> - <?= $data["nama_barang"]; ?></td>
+                                            <td><?= $data["jumlah"]; ?></td>
+                                            <td><?= $data["nama_satuan"]; ?></td>
+                                            <td><?= $data["nama_supplier"]; ?> - <?= $data["kab_kota"]; ?></td>
+                                            <td>Rp.<?= number_format($data["harga"]); ?>,-</td>
+                                            <td><?= $data["tanggal"]; ?></td>
+                                            <td>Rp.<?= number_format($subtotal); ?>,-</td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete<?= $id; ?>">
+                                                    Hapus
+                                                </button>
+                                                <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#ubah<?= $id; ?>">
                                                     Ubah
                                                 </button>
                                             </td>
@@ -336,6 +405,7 @@ if (!isset($_SESSION["login"])) {
                                         </div>
                                     <?php endwhile; ?>
                                 </tbody>
+
                             </table>
                         </div>
                     </div>
@@ -358,6 +428,25 @@ if (!isset($_SESSION["login"])) {
     <script src="assets/demo/chart-bar-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
 </body>
 
 <!-- The Modal tambah -->

@@ -6,10 +6,10 @@ $pass = ""; //pass server
 $db = "kasirdimdimmusic"; //nama database
 
 // Create connection
-$conn = mysqli_connect($host, $user, $pass, $db);
+$conn = new mysqli($host, $user, $pass, $db);
 
 // Check connection
-if (!$conn) {
-    die("Connection fail: " . mysqli_connect_errno() . " - " . mysqli_connect_error());
+if ($conn->connect_error) {
+    die("Connection fail: " . $conn->connect_error);
 }
 // echo "Connected successfully";

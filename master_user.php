@@ -131,7 +131,7 @@ if (!isset($_SESSION["login"])) {
                             <i class="fas fa-table me-1"></i>
                             User
                         </div>
-                        <div class="card-body">
+                        <!-- <div class="card-body">
                             <table id="datatablesSimple">
                                 <thead>
                                     <tr>
@@ -162,6 +162,48 @@ if (!isset($_SESSION["login"])) {
                                                     Hapus
                                                 </button>
                                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ubah<?= $data["id_user"]; ?>">
+                                                    Ubah
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                    <?php endwhile; ?>
+                                </tbody>
+                            </table>
+                        </div> -->
+
+                        <!-- New Tables -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Username</th>
+                                        <th>Password</th>
+                                        <th>Nama Lengkap</th>
+                                        <th>Level</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    //menampilkan data
+                                    $no = 1;
+                                    $tampil = mysqli_query($conn, "SELECT * FROM master_user");
+                                    while ($data = mysqli_fetch_array($tampil)) :
+                                        $id = $data["id_user"];
+                                    ?>
+                                        <tr>
+                                            <td><?= $no++; ?>.</td>
+                                            <td><?= $data["username"]; ?></td>
+                                            <td><?= $data["pw"]; ?></td>
+                                            <td><?= $data["full_name"]; ?></td>
+                                            <td><?= $data["level"]; ?></td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?= $id; ?>">
+                                                    Hapus
+                                                </button>
+                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ubah<?= $id; ?>">
                                                     Ubah
                                                 </button>
                                             </td>
@@ -250,6 +292,7 @@ if (!isset($_SESSION["login"])) {
                                         </div>
                                     <?php endwhile; ?>
                                 </tbody>
+
                             </table>
                         </div>
                     </div>

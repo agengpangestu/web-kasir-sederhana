@@ -125,7 +125,7 @@ if (!isset($_SESSION["login"])) {
                             <i class="fas fa-table me-1"></i>
                             Daftar Merek
                         </div>
-                        <div class="card-body">
+                        <!-- <div class="card-body">
                             <table id="datatablesSimple">
                                 <thead>
                                     <tr>
@@ -160,8 +160,48 @@ if (!isset($_SESSION["login"])) {
                                             </td>
                                         </tr>
 
+
+
+                                    <?php endwhile; ?>
+                                </tbody>
+                            </table>
+                        </div> -->
+
+                        <!-- New Tables -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Nama Merek</th>
+                                        <th>Ket. Merek</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $ambil = mysqli_query($conn, "SELECT * FROM master_merek");
+                                    $no = 1;
+
+
+                                    while ($data = mysqli_fetch_array($ambil)) :
+                                        $nama_merek = $data["nama_merek"];
+                                    ?>
+                                        <tr>
+                                            <td><?= $no++; ?>.</td>
+                                            <td><?= $data["nama_merek"]; ?></td>
+                                            <td><?= $data["ket_merek"]; ?></td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?= $nama_merek; ?>">
+                                                    Hapus
+                                                </button>
+                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ubah<?= $nama_merek; ?>">
+                                                    Ubah
+                                                </button>
+                                            </td>
+                                        </tr>
                                         <!-- The Modal hapus -->
-                                        <div class="modal" id="delete<?= $id; ?>">
+                                        <div class="modal" id="delete<?= $nama_merek; ?>">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <!-- Modal Header -->
@@ -189,7 +229,7 @@ if (!isset($_SESSION["login"])) {
                                             </div>
                                         </div>
                                         <!-- The Modal Ubah -->
-                                        <div class="modal" id="ubah<?= $id; ?>">
+                                        <div class="modal" id="ubah<?= $nama_merek; ?>">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <!-- Modal Header -->
@@ -216,11 +256,12 @@ if (!isset($_SESSION["login"])) {
                                                 </div>
                                             </div>
                                         </div>
-
                                     <?php endwhile; ?>
                                 </tbody>
+
                             </table>
                         </div>
+
                     </div>
                 </div>
             </main>

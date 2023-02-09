@@ -108,7 +108,7 @@ if (!isset($_SESSION["login"])) {
                     <h1 class="mt-4">Kategori</h1>
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
-                            <div class="card bg-primary text-white mb-4">
+                            <div class="card bg-info text-white mb-4">
                                 <!-- menghitung jumlah kategori -->
                                 <?php
                                 $jumlah_ktg = mysqli_query($conn, "SELECT * FROM master_kategori");
@@ -124,7 +124,7 @@ if (!isset($_SESSION["login"])) {
 
 
                     <!-- Button to Open the Modal tambah barang -->
-                    <button type="button" class="btn btn-info mb-4" data-bs-toggle="modal" data-bs-target="#kategoriModal">
+                    <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#kategoriModal">
                         Tambah Kategori
                     </button>
 
@@ -136,8 +136,47 @@ if (!isset($_SESSION["login"])) {
                             <i class="fas fa-table me-1"></i>
                             Daftar Kategori
                         </div>
+                        <!-- <div class="card-body">
+                            <table id="datatablesSimple" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Nama Kategori</th>
+                                        <th>Ket. Kategori</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    //menampilkan data
+                                    $no = 1;
+                                    $ambil = mysqli_query($conn, "SELECT * FROM master_kategori ");
+                                    while ($data = mysqli_fetch_array($ambil)) :
+                                        $id = $data["id_kategori"];
+                                    ?>
+                                        <tr>
+                                            <td><?= $no++; ?>.</td>
+                                            <td><?= $data["nama_kategori"]; ?></td>
+                                            <td><?= $data["ket_kategori"]; ?></td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?= $id; ?>">
+                                                    Hapus
+                                                </button>
+                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ubah<?= $id; ?>">
+                                                    Ubah
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                    <?php endwhile; ?>
+                                </tbody>
+
+                            </table>
+                        </div> -->
+
+                        <!-- New Tables -->
                         <div class="card-body">
-                            <table id="datatablesSimple">
+                            <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
@@ -227,6 +266,7 @@ if (!isset($_SESSION["login"])) {
                                         </div>
                                     <?php endwhile; ?>
                                 </tbody>
+
                             </table>
                         </div>
                     </div>
